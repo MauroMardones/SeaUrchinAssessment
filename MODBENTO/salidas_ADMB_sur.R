@@ -4,6 +4,8 @@ data.dir <- "C:/Users/mauricio.mardones/Documents/IFOP/Eval_Stock/ERIZO/2019/XSU
 source("C:/Users/mauricio.mardones/Documents/IFOP/Eval_Stock/ERIZO/2019/XSUR/MODBENTO/read.admb.R")
 library("ggplot2")
 
+
+# aqui es necesario compilar
 #============================================================================================
 system("tpl2cpp -bounds Modbento");system("adcomp -s Modbento");system("adlink -s Modbento")
 system("Modbento")
@@ -24,7 +26,7 @@ datos.X <-read.rep('Modbento.rep')
 names(datos.X)
 datos.X
 
-year<-datos.X$A�os
+year<-datos.X$Años
 year
 
 CPUE_obs<-datos.X$CPUE_obs[1,] 
@@ -60,8 +62,8 @@ R_pred
 
 Mortalidad_pesca<-datos.X$F
 
-Reducci�n<-datos.X$Reducci�n
-Reducci�n
+Reducción<-datos.X$Reducción
+Reducción
 
 Selectividad<-datos.X$Selectividad
 Selectividad
@@ -80,7 +82,7 @@ par(mfrow=c(2,2))
 plot(year, CPUE_est,xaxp=c(year[1],year[length(year)]+1,length(year)), type="l", col="black", axes=T, ann=F, lwd=2, lty=1,las=1)
 points(year, CPUE_obs, type ="p", lwd=1)
 title(main="CPUE", col.main="black", font.main=2)
-title(xlab="A�os", col.lab="black")
+title(xlab="Años", col.lab="black")
 title(ylab="Kg/hora", col.lab="black")
 legend("topright", c("CPUE_obs", "CPUE_est"), lty=c(NA,1), pch=c(1,NA), bty="n", cex=0.8)
 
@@ -89,8 +91,8 @@ legend("topright", c("CPUE_obs", "CPUE_est"), lty=c(NA,1), pch=c(1,NA), bty="n",
 #x11()
 plot(year,Desemb_obs,xaxp=c(year[1],year[length(year)]+1,length(year)), type ="l", col = "black", axes=T, ann=F, lwd=2,las=1)
 points(year,Desemb_est, type ="p") #Volvemos a dibujar camiones.
-title(main="Desembarques(ton)", col.main="black", font.main=2) #t�tulo
-title(xlab="A�os", col.lab="black")
+title(main="Desembarques(ton)", col.main="black", font.main=2) #título
+title(xlab="Años", col.lab="black")
 title(ylab="Toneladas", col.lab="black")
 legend("topright", c("Desemb_obs", "Desemb_est"), lty=c(1,NA), pch=c(NA,1), bty="n", cex=0.8)
 
@@ -100,7 +102,7 @@ plot(year,Biomasa_explotable, xaxp=c(year[1],year[length(year)]+1,length(year)/2
 points(year, Biomasa_total, type ="l", lty=1, col="blue", lwd=2)
 points(year, BD, type ="l", lty=1, col ="green", lwd=2)
 title(main="Biomasas", col.main="black", font.main=2)
-title(xlab="A�os", col.lab="black")
+title(xlab="Años", col.lab="black")
 title(ylab="Toneladas", col.lab="black")
 legend("topright", c("Biom_expl", "Biom_tot", "Biom_Desov"), lty=c(1,1,1), col=c("black","blue", "green"), bty="n", cex=0.8)
 
@@ -113,8 +115,8 @@ dev.off()
 par(mfrow=c(2,2))
 plot(year,R_est,xaxp=c(year[1],year[length(year)]+1,length(year)), type ="l", col = "black", axes=T, ann=F, lwd=2, ylim=c(0,400),las=1)
 points(year,R_pred, type ="l", lty=2, lwd=1, pch=1) #Volvemos a dibujar camiones.
-title(main="Reclutamiento", col.main="black", font.main=2) #t�tulo
-title(xlab="A�os", col.lab="black")
+title(main="Reclutamiento", col.main="black", font.main=2) #título
+title(xlab="Años", col.lab="black")
 title(ylab="Individuos", col.lab="black")
 legend("bottomleft", c("R_est", "R_pred"), lty=c(1,3), bty="n", cex=0.8)
 
@@ -122,25 +124,25 @@ legend("bottomleft", c("R_est", "R_pred"), lty=c(1,3), bty="n", cex=0.8)
 # TALLAS  MEDIAS
 plot(year,Lmed_obs, xaxp=c(year[1],year[length(year)]+1,length(year)), type ="l", col = "black", axes=T, ann=F, lwd=2,las=1, ylim=c(40, 100))
 points(year,Lmed_est, type ="p", lty=2) #Volvemos a dibujar camiones.
-title(main="Lmed", col.main="black", font.main=2) #t�tulo
-title(xlab="A�os", col.lab="black")
+title(main="Lmed", col.main="black", font.main=2) #título
+title(xlab="Años", col.lab="black")
 title(ylab="cm", col.lab="black")
 legend("bottomleft", c("Lmed_est", "Lmed_obs"), lty=c(1,NA), pch=c(NA,1), bty="n", cex=0.8)
 
 # MORTALIDAD POR PESCA
 #x11()
 plot(year, Mortalidad_pesca, xaxp=c(year[1],year[length(year)]+1,length(year)*1),type ="l", col="black", axes=T, ann=F, lwd=2,las=1)
-#title(main="Mortalidad por pesca", col.main="black", font.main=2) #t�tulo
-title(xlab="A�os", col.lab="black")
+#title(main="Mortalidad por pesca", col.main="black", font.main=2) #título
+title(xlab="Años", col.lab="black")
 title(ylab="Mortalidad por pesca (F)", col.lab="black")
 abline(h=0.19,col="red", lwd = "3")
 legend("topleft", "F40 = 0.19", lty=1, bty="n", cex=1.2, col = "red", lwd = "2")
 
 # REDUCCIOND DE BIOMASA
 #x11()
-plot(year, Reducci�n, xaxp=c(year[1],year[length(year)]+1,length(year)*1),type ="l", col="black", axes=T, ann=F, las=1,lwd=2)
-#title(main="Reducci�n de BD", col.main="black", font.main=2) #t�tulo
-title(xlab="A�os", col.lab="black")
+plot(year, Reducción, xaxp=c(year[1],year[length(year)]+1,length(year)*1),type ="l", col="black", axes=T, ann=F, las=1,lwd=2)
+#title(main="Reducción de BD", col.main="black", font.main=2) #título
+title(xlab="Años", col.lab="black")
 title(ylab="BD/BDo", col.lab="black")
 abline(h = 0.4, col = "red", lwd = "3") #PBR??
 legend("topright", "BD/BDo 40%", lty=1, bty="n", cex=1.2, col = "red", lwd = "2")
@@ -153,7 +155,7 @@ edad<-1:12
 plot(edad, Selectividad_1, type ="l",col = "black", axes=T, ann=F,las=1)
 points(edad,Selectividad_2, type ="l", lty=1, col="blue", lwd=2) #Volvemos a dibujar camiones.
 points(edad, Selectividad_3, type = "l", lty=1, col="red")
-#title(main="Selectividad", col.main="black", font.main=2) #t�tulo
+#title(main="Selectividad", col.main="black", font.main=2) #título
 title(xlab="Edad", col.lab="black")
 title(ylab="S", col.lab="black")
 legend("bottomright", c("Sel_60_01", "Sel_02_09", "Sel_10_13"), horiz = TRUE, lty=c(1,1,1), col=c("black","blue", "red"), bty="n", cex=1)
@@ -161,8 +163,8 @@ legend("bottomright", c("Sel_60_01", "Sel_02_09", "Sel_10_13"), horiz = TRUE, lt
 
 
 ########################################################################
-year<-datos.X$A�os
-nyears <- length(datos.X$A�os)  
+year<-datos.X$Años
+nyears <- length(datos.X$Años)  
 
 #Residuos                                                                       
 Res_Cpue   <-log(CPUE_obs)-log(CPUE_est)                                             
@@ -191,7 +193,7 @@ x11()
 par(mfrow=c(2,2))
 par(mar=c(4,4,1,1)+0.5)
 plot(year,CPUE_est,type="l",cex.axis=1,lwd=2,xaxp=c(year[1],year[length(year)]+1,length(year)*1),
-     ylim=c(0,max(CPUE_est)+2), xlim = c(1960, max (year)+1),xaxs= "i",yaxs= "i",ylab="Indice Relativo CPUE",las=1,xlab="A�os",cex.lab=1.2)
+     ylim=c(0,max(CPUE_est)+2), xlim = c(1960, max (year)+1),xaxs= "i",yaxs= "i",ylab="Indice Relativo CPUE",las=1,xlab="Años",cex.lab=1.2)
 arrows(x0=year,y0=obsCpue95i,x1=year,y1=obsCpue95s,length=0.05,angle=90,lty=1,code=3)
 points(year,CPUE_obs,cex=1.2,bg="black",pch=21)
 
@@ -200,13 +202,13 @@ points(year,CPUE_obs,cex=1.2,bg="black",pch=21)
 #AJUSTE LONGITUD MEDIA
 x11()
 plot(year,Desemb_est,type="l",cex.axis=1,lwd=2,xaxp=c(year[1],year[length(year)]+1,length(year)*1),
-     ylim=c(0,max(Desemb_est)+1000),xlim = c(1960, max (year)+1),xaxs= "i",yaxs= "i",ylab="Desembarques (t.)",las=1,xlab="A�os",cex.lab=1.2)
+     ylim=c(0,max(Desemb_est)+1000),xlim = c(1960, max (year)+1),xaxs= "i",yaxs= "i",ylab="Desembarques (t.)",las=1,xlab="Años",cex.lab=1.2)
 arrows(x0=year,y0=obsD95i,x1=year,y1=obsD95s,length=0.05,angle=90,lty=1,code=3)
 points(year,Desemb_obs ,cex=1.2,bg="black",pch=21, lwd=2)
 x11()
 par(mar=c(4,4,1,1)+0.5)
 plot(year,Lmed_est ,type="l",cex.axis=1,lwd=2,xaxp=c(year[1],year[length(year)]+5,(length(year)+4)*1),
-     ylim=c(60,max(Lmed_est)+5),xlim = c(1960, max (year)+1), xaxs= "i",yaxs= "i",ylab="Longitud media (cm)",las=1,xlab="A�os",cex.lab=1.2)
+     ylim=c(60,max(Lmed_est)+5),xlim = c(1960, max (year)+1), xaxs= "i",yaxs= "i",ylab="Longitud media (cm)",las=1,xlab="Años",cex.lab=1.2)
 arrows(x0=year,y0=obsLmed95i,x1=year,y1=obsLmed95s ,length=0.05,angle=90,col=4,lty=1,code=3)
 points(year,Lmed_obs,cex=1.2,bg="blue",pch=21,col=4)
 legend("topright", c("L_Pred", "L_Obs"), horiz = TRUE, lty=c(1,1), lwd = 2, col = c("black","blue"), bty="n", cex=1.2)
@@ -216,7 +218,7 @@ legend("topright", c("L_Pred", "L_Obs"), horiz = TRUE, lty=c(1,1), lwd = 2, col 
 x11()
 par(mar=c(4,4,1,1)+0.5)
 plot(year,R_est,type="l",cex.axis=1,lwd=2,xaxp=c(year[1],year[length(year)]+5,(length(year)+4)*1),
-     ylim=c(0,max(R_est)+350),xlim = c(1960, max (year)),xaxs= "i",yaxs= "i",ylab="Reclutamiento (t)",las=1,xlab="A�os",cex.lab=1.2)
+     ylim=c(0,max(R_est)+350),xlim = c(1960, max (year)),xaxs= "i",yaxs= "i",ylab="Reclutamiento (t)",las=1,xlab="Años",cex.lab=1.2)
 #arrows(x0=year,y0=obsRecl95i,x1=year,y1=obsRecl95s,length=0.05,angle=90,col=4,lty=1,code=3)
 lines(year,R_pred,cex=1.2,bg="blue",pch=21,col=4, lwd=2)
 legend("topright", c("R_est", "R_pred"), horiz = TRUE, lty=c(1,1), lwd = 2, col = c("black","blue"), bty="n", cex=1.2)
@@ -267,16 +269,16 @@ qqnorm(Res_Recl ); qqline(Res_Recl , col = 2)
 
 
 #============================================================#
-# II. COMPOSICI�N EDAD DE LAS CAPTURAS                       #
+# II. COMPOSICIÓN EDAD DE LAS CAPTURAS                       #
 #============================================================#
 names(datos.X)
-year<-datos.X$A�os
-nyears <- length(datos.X$A�os)    
+year<-datos.X$Años
+nyears <- length(datos.X$Años)    
 tallas <- seq(40, 146,2)
 ntalla <- length(tallas)
-#Proporci�n observada                                        
+#Proporción observada                                        
 pobsF<-datos.X$pobs                                         
-#Proporci�n predicha                                         
+#Proporción predicha                                         
 ppredF<-datos.X$ppred
 
 par(mfrow=c(6,4),mar=c(1,1,1,1)+1)
@@ -326,17 +328,17 @@ if(is.na(vol)==FALSE){
 }}}
 mtext("Tallas",side=1,line=3.2,cex=1.1);posi<-seq(1,57,by=4)
 axis(2,at=anos,labels=anos,las=2)
-mtext("A�os",side=2,line=4.7,cex=1.1)
+mtext("Años",side=2,line=4.7,cex=1.1)
 box()
 #dev.off()
 
 
 #===================================================================================
 #============================================================#
-# III. Abundabcia a la edad por a�o                          #
+# III. Abundabcia a la edad por año                          #
 #============================================================#
-year<-datos.X$A�os
-nyears <- length(datos.X$A�os)    
+year<-datos.X$Años
+nyears <- length(datos.X$Años)    
      
 edades <- seq(1,12)
 nedades<- length(edades)
@@ -354,11 +356,11 @@ for(i in 1:nyears){
 
 #===================================================================================
 #============================================================#
-# IV. Selectividad a la edad por a�o                          #
+# IV. Selectividad a la edad por año                          #
 #============================================================#
 
-year<-datos.X$A�os
-nyears <- length(datos.X$A�os)    
+year<-datos.X$Años
+nyears <- length(datos.X$Años)    
 
 edades <- seq(1,12)
 nedades<- length(edades)
@@ -399,7 +401,7 @@ BiomProyF1.5 <- datos.X$Biomasa_desovante_proyectada_para_cada_mF[4,]
 #x11()
 par(mfrow=c(2,1))
 plot(c(year, seq(2019, 2028, 1)), c(datos.X$Biomasa_desovante,rep(NA,10)), type="l", lwd = "3", col="1",  
-     ylab = "Biomasa Desovante (ton)", xlab = "a�os proyectados")
+     ylab = "Biomasa Desovante (ton)", xlab = "años proyectados")
 lines(c(year, seq(2019, 2028, 1)), c(datos.X$Biomasa_desovante,rep(BiomProyF0)), type="l", col="3")
 lines(c(year, seq(2019, 2028, 1)), c(datos.X$Biomasa_desovante,rep(BiomProyF0.5)), type="l", col="4")
 lines(c(year, seq(2019, 2028, 1)), c(datos.X$Biomasa_desovante,rep(BiomProyF1)), type="l", col="5")
@@ -423,7 +425,7 @@ CaptProyF1.5 <- datos.X$Capturas[4,]
 
 #x11()
 plot(c(year, seq(2019, 2028, 1)), c(datos.X$Desemb_obs[1,],rep(NA,10)), type="l", lwd = "2", col="1", ylim = c(0, 20000), 
-     ylab = "Capturas (ton)", xlab = "A�os Proyectados")
+     ylab = "Capturas (ton)", xlab = "Años Proyectados")
 lines(c(year, seq(2019, 2028, 1)), c(datos.X$Desemb_obs[1,],rep(CaptProyF0)), type="l", col="3")
 lines(c(year, seq(2019, 2028, 1)), c(datos.X$Desemb_obs[1,],rep(CaptProyF0.5)), type="l", col="4")
 lines(c(year, seq(2019, 2028, 1)), c(datos.X$Desemb_obs[1,],rep(CaptProyF1)), type="l", col="5")
@@ -455,12 +457,12 @@ ssbt <- c((SSBt-1.96*SSBtstd),rev((SSBt+1.96*SSBtstd)))
 par(mfrow=c(2,1),mar=c(0,4,2,1)+1)
 
 plot(x, bt,type="n",ylim=c(0,max(bt)),cex.axis=0.8,xaxs="i",yaxs="i",xlim=x2,xaxp=x1,
-	ylab="Biomasa total (t)",las=1,xlab="A�o",cex.lab=1.1, mgp=c(4,1,0))
+	ylab="Biomasa total (t)",las=1,xlab="Año",cex.lab=1.1, mgp=c(4,1,0))
 polygon(x,bt, col="gray",border="gray")
 lines(year,BT,lwd=2)
 
 plot(x,ssbt,type="n",ylim=c(0,max(ssbt)),cex.axis=0.8,xaxs="i",yaxs="i",xlim=x2,xaxp=x1,                                                               
-	ylab="Biomasa desovante (t)",las=1,xlab="A�o",cex.lab=1.1, mgp=c(4,1,0))                
+	ylab="Biomasa desovante (t)",las=1,xlab="Año",cex.lab=1.1, mgp=c(4,1,0))                
 polygon(x,ssbt,col="gray", border="gray")
 lines(year,SSBt,lwd=2)   
 #lines(year,rep(rep$SSBpbr[3],nyears),lwd=2,col=2)
@@ -483,12 +485,12 @@ logdrt <- c((logdesvRt-1.96*logdesvRtstd),rev(logdesvRt+1.96*logdesvRtstd))
 par(mfrow=c(2,1),mar=c(2,4,2,1)+0.5)
 
 plot(x,rt , type="n", xaxp=x1,cex.axis=0.8,xaxs= "i",yaxs= "i",
-	xlim=x2,ylab="Reclutamientos",las=1,xlab="A�o",cex.lab=1.1)
+	xlim=x2,ylab="Reclutamientos",las=1,xlab="Año",cex.lab=1.1)
 polygon(x, rt , col="gray", border = "gray");lines(year,Reclutas,lwd=2)
 abline(h=exp(std$log_Ro+0.5*0.6^2)*10^-6,col=2,lty=2)
 
 plot(x, logdrt, type="n", xaxp=x1,cex.axis=0.8,xaxs= "i",yaxs= "i",
-	xlim=x2,ylab="Desvios de los Reclutamientos",las=1,xlab="A�o",cex.lab=1.1)
+	xlim=x2,ylab="Desvios de los Reclutamientos",las=1,xlab="Año",cex.lab=1.1)
 polygon(x, logdrt, col="gray", border = "gray");lines(year,logdesvRt,lwd=2)
 abline(h=0,lty=2,col="darkgray")
 #dev.off()
@@ -506,7 +508,7 @@ ft  <- c(exp((Ft)-1.96*(Ftstd)),rev(exp((Ft)+1.96*(Ftstd))))
 #x11()
 par(mfrow=c(1,1),mar=c(2.5,4,1,1)+0.5,oma=c(1,1,2,0))
 plot(x, ft, xaxp=x1,cex.axis=0.8,xaxs= "i",yaxs= "i",
-	xlim=x2,type="n", ylab="Mortalidad por pesca (F)",las=1,xlab="A�o",cex.lab=1.1)
+	xlim=x2,type="n", ylab="Mortalidad por pesca (F)",las=1,xlab="Año",cex.lab=1.1)
 polygon(x, ft, col="gray", border = "gray");lines(year,exp(Ft),lwd=2)
 #lines(year,rep(1.0,nyears),lty=2) #mortalidad natural
 lines(year,rep(rep$Fs[2],nyears),lwd=2,col=2) #Frms
@@ -524,7 +526,7 @@ rprt   <- c((RPRt-1.96*RPRtstd),rev((RPRt+1.96*RPRtstd)))
 x11()
 par(mfrow=c(1,1),mar=c(2,4,2,1)+0.5)
 plot(x,rprt,type="n",ylim=c(0,max(rprt)),cex.axis=0.8,xaxs="i",yaxs="i",xlim=x2,xaxp=x1,
-	ylab="RPR",las=1,xlab="A�o",cex.lab=1.1)
+	ylab="RPR",las=1,xlab="Año",cex.lab=1.1)
 polygon(x,rprt, col="gray",border="gray")
 abline(h = 0.4, col = "yellow", lwd = "3")#PBR??
 abline(h= 0.2, col = "red", lwd =3)
@@ -541,11 +543,11 @@ datos.X <-read.rep('Modbento.rep')
 names(datos.X)
 datos.X
 
-year<-datos.X$A�os
+year<-datos.X$Años
 length(year)
 
 
-RPRlp<-datos.X$Reducci�n
+RPRlp<-datos.X$Reducción
 
 Fb1<-datos.X$F[1:length(year)]
 
@@ -583,8 +585,8 @@ F95      <- c(lastF*exp(-Qmult*FvSE),lastF*exp(Qmult*FvSE))
 #===============================================================
 cx    <-c(0,0.5,0.5,0,0)        #colapso
 cy    <-c(-0.3,-0.3,9,9,-0.3)   #colapso
-sex   <-c(0.5,1,1,0.5,0.5)      #sobre-explotaci�n
-sey   <-c(-0.3,-0.3,9,9,-0.3)   #sobre-explotaci�n
+sex   <-c(0.5,1,1,0.5,0.5)      #sobre-explotación
+sey   <-c(-0.3,-0.3,9,9,-0.3)   #sobre-explotación
 spx   <-c(1,3,3,1,1)            #sobrepesca
 spy   <-c(1,1,9,9,1)            #sobrepesca
 subex <-c(1,3,3,1,1)            #subexplotado
@@ -621,7 +623,7 @@ arrows(x0=tail(BD_BD40,1),y0=F95[1],x1=tail(BD_BD40,1),y1=F95[2],length=0.05,ang
 #lines(BD_BD40,F_F40,type="o",pch=21,bg="white",cex=1.1)
 lines(BD_BD40,F_F40,lty=2,lwd=2)
 points(c(BD_BD40[1],BD_BD40[length(year)]),c(F_F40[1],F_F40[length(year)]),col=c(1,1),bg=c(3,2),pch=21,cex=1.8)
-#points(rpr[length(lc$ano)],frel[length(lc$ano)],pch=19) #año más reciente
+#points(rpr[length(lc$ano)],frel[length(lc$ano)],pch=19) #aÃ±o mÃ¡s reciente
 abline(v=0.5,col="red", lwd=2)
 lines(c(1,1),c(0,1),col="green", lwd=2)
 lines(c(1,4),c(1,1),col="green", lwd=2)
@@ -649,16 +651,16 @@ for(i in 1:4){
 round(CBA,1)
 
 ########################################################################
-# ESTIMACI�N DE CURVA SPR
+# ESTIMACIÓN DE CURVA SPR
 ########################################################################
 
 source("D:/Mauricio/2017_xnorte/X_NOR/MODBENTO/Fn_pbr.R")
 
 #datos de entrada
 Dat<-list()
-Dat$M		    <- 0.25                  # M se asume constate para edades y a�os
-Dat$Tspw	  <- 0.91             # corresponde a la �poca de desove en sardina es 2/12 (a�o biol�gico)
-Dat$Mad	    <- datos.X$msex_edad      # Paso 1:  Fmediana serie hist�rica 1990-2008
+Dat$M		    <- 0.25                  # M se asume constate para edades y años
+Dat$Tspw	  <- 0.91             # corresponde a la época de desove en sardina es 2/12 (año biológico)
+Dat$Mad	    <- datos.X$msex_edad      # Paso 1:  Fmediana serie histórica 1990-2008
 Dat$Wmed	  <- datos.X$Wmed_edad     # vector del promedio del peso medio a la edad (suma las columnas) !!! revisar esto!!!
 Dat$Sel     <- datos.X$Selectividad[nyears,] 
 
@@ -673,7 +675,7 @@ SPRcurv 		   <- SPRFmort(R0,Fmort,Amax,Dat)
 x11()
 par(mfrow=c(2,1),mar=c(4,4.5,2,1)+0.5)
 
-plot(seq(1,Amax,1),datos.X$msex_edad,type="l", ylim=c(0,1.05),ylab="Madurez y selectividad",xlab="Edad (a�os)",las=1,col=3,lwd=2)
+plot(seq(1,Amax,1),datos.X$msex_edad,type="l", ylim=c(0,1.05),ylab="Madurez y selectividad",xlab="Edad (años)",las=1,col=3,lwd=2)
 lines(seq(1,Amax),datos.X$Selectividad[nyears,],col=4,lwd=2)
 legend(4.5,max(datos.X$Selectividad[nyears,])-0.5,c("Madurez", "Selectividad"),
        col=c(3,4),bty="n", lwd=c(2,2),lty=c(1,1),cex=1)
